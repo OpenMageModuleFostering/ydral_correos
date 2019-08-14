@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<layout>
+    
+	<adminhtml_system_config_edit>
+		<reference name="head">
+            <action method="addJs" ifconfig="correos/general/active"><script>correos/proj4js-compressed.js</script></action>
+            <action method="addJs" ifconfig="correos/general/active"><script>correos/correos.js</script></action>
+            <action method="addCss"><stylesheet>correos/correos.css</stylesheet></action>
+        </reference>
+        <reference name="js">
+            <block type="core/template" name="correosHead" template="correos/head.phtml"/>
+		</reference>
+	</adminhtml_system_config_edit>
+	
+    <adminhtml_sales_order_view>
+        <reference name="head">            
+            <action method="addJs" ifconfig="correos/opciones/showjqueryadmin"><stylesheet>correos/jquery-1.10.2.min.js</stylesheet></action>
+            <action method="addJs" ifconfig="correos/opciones/showjqueryadmin"><stylesheet>correos/noconflict.js</stylesheet></action>
+            <action method="addItem"><type>skin_js</type><name>correos/fancybox/jquery.fancybox.pack.js</name><params/></action>
+            <action method="addCss"><stylesheet>correos/fancybox/jquery.fancybox.css</stylesheet></action>            
+        </reference>
+	    <reference name="order_tab_info">
+		    <action method="setTemplate"><template>correos/ship_order_info.phtml</template></action>
+	    </reference>
+    </adminhtml_sales_order_view>
+
+	<adminhtml_sales_order_shipment_new>
+	    <reference name="head">
+	        <action method="addCss" ifconfig="correos/general/active"><stylesheet>correos/correos.css</stylesheet></action>
+	    </reference>
+        <reference name="js">
+            <block type="core/template" name="correosHead" template="correos/head.phtml"/>
+		</reference>
+	    <reference name="order_items"><action method="setTemplate"><template>correos/sales_order_shipment_create_items.phtml</template></action></reference>
+	</adminhtml_sales_order_shipment_new>
+	
+	<adminhtml_adminhtml_mail_recogida>
+        <update handle="editor"/>
+        <reference name="content">
+            <block type="correos/adminhtml_recogidas_edit" name="form_recogidas"/>
+        </reference>
+	</adminhtml_adminhtml_mail_recogida>
+	
+	<adminhtml_sales_order_create_index>
+        <reference name="head">
+            <action method="addJs" ifconfig="correos/general/active"><script>correos/proj4js-compressed.js</script></action>
+            <action method="addJs" ifconfig="correos/general/active"><script>correos/correos.js</script></action>
+            <action method="addCss" ifconfig="correos/general/active"><stylesheet>correos.css</stylesheet></action>
+        </reference>
+        <reference name="js">
+            <block type="core/template" name="correosHead" template="correos/head.phtml"/>
+		</reference>
+	</adminhtml_sales_order_create_index>
+	
+	<adminhtml_adminhtml_ship_shipping>
+		<reference name="head">
+            <action method="addJs" ifconfig="correos/general/active"><script>correos/proj4js-compressed.js</script></action>
+            <action method="addJs" ifconfig="correos/general/active"><script>correos/correos.js</script></action>
+            <action method="addCss"><stylesheet>correos/correos.css</stylesheet></action>
+        </reference>
+        <remove name="header" />
+        <remove name="footer" />
+        <remove name="menu" />
+        <remove name="notifications" />
+        <remove name="breadcrumbs" />
+        <remove name="messages" />
+        <remove name="profiler" />
+        <remove name="before_body_end" />
+        <remove name="global_notices" />
+        <reference name="js">
+            <block type="core/template" name="correosHead" template="correos/head.phtml"/>
+		</reference>
+        <reference name="content">
+            <block type="adminhtml/sales_order_create_shipping_method_form" name="form_shipping_methods_correos" template="correos/shipping_methods.phtml" />
+        </reference>
+	</adminhtml_adminhtml_ship_shipping>
+	
+</layout>

@@ -1,0 +1,32 @@
+<?php
+$_helper = Mage::helper('correos');
+$_quote = Mage::getSingleton('checkout/session')->getQuote()->getShippingAddress();
+$_metodo = $this->getData('metodo');
+?>
+
+<div id="content_homepaq_correos">
+    
+    <p id="correospaq_alert_cod" class="correospaq_alert_cod"><?php echo $this->__('¡No compatible con Reembolso!') ?></p>
+
+    <div id="homepaq_search">
+        <p style="float: right">
+            <a href="#" class="homepaqsearch" id="homepaqsearch" onclick="PuntosCorreos.searchPuntosHomepaq('<?php echo $_metodo ?>'); return false;" title="Buscar"><?php echo $this->__('Buscar') ?></a>
+        </p>
+        <p style="float: right">
+            <span><strong><?php echo $this->__('Introduce tu Usuario CorreosPaq:') ?></strong></span>
+            <span><input type="text" id="homepaquser" style="width:120px" class="required-entry input-text required-entry" /></span>
+        </p>
+        
+        <br />
+        
+        <span class="homepaq_register_link">
+            <a href="http://www.correospaq.es/ss/Satellite?c=Page&cid=1363189180749&pagename=CorreosPaqSite/Page/A_Layout_PAQ" target="_blank"><?php echo $this->__('¿Qué es CorreosPaq?') ?></a>
+            <a href="https://online.correospaq.es/pages/registro.xhtml" id="homepaqurl" target="_blank"><?php echo $this->__('¡Regístrate Gratis!') ?></a>
+        </span>
+    </div>
+    
+
+
+    <div style="clear: both; "></div>
+
+</div>

@@ -1,0 +1,38 @@
+<?php
+$_helper    = Mage::helper('correos');
+$_quote     = $this->getShippingAddress();
+$partsMethod = explode('_', $this->getData('metodo')); 
+$_metodo = $partsMethod[0];
+?>
+<div id="content_4872_correos" style="margin-left: 15px; clear: both; ">
+    <?php if (!$this->validarMovil()): ?>
+    <p><?php echo $this->__('Si desea recibir información sobre el estado de su envío mediante SMS por favor facilítenos su teléfono móvil.') ?></p>
+        <label for="correos_email"><?php echo $this->__('E-mail:') ?></label>
+        <input type="text" name="correos_email" value="<?php echo $_quote->getEmail() ?>" id="correos_email" class="required-correos input-text validate-email" />
+        <label for="phone_correos"><?php echo $this->__('Teléfono móvil:') ?></label>
+        <input type="text" name="phone_correos" value="" id="phone_correos" class="required-correos input-text" />
+        <label for="correos_mobile_lang"><?php echo $this->__('Idioma SMS') ?></label>
+        <select style="width:95px" name="correos_mobile_lang" id="correos_mobile_lang">
+            <option value="1"><?php echo $this->__('Castellano') ?></option>
+            <option value="2"><?php echo $this->__('Catalá') ?></option>
+            <option value="3"><?php echo $this->__('Euskera') ?></option>
+            <option value="4"><?php echo $this->__('Gallego') ?></option>
+        </select>
+    <?php endif; ?>
+    <?php if ($this->showTimetable($this->getData('metodo'))): ?>
+    <div id="timetable" style="font-weight: bold;" class="correos_timetable">
+	    <div id="timetable_inner">
+	        <?php echo $this->__('Selecciona horario de entrega:') ?>
+	        <input type="radio" name="cr_timetable" id="cr_timetable" value="01"><label for="9_12">09:00 - 12:00</label>
+	        <input type="radio" name="cr_timetable" id="cr_timetable" value="02"><label for="12_15">12:00 - 15:00</label>
+	        <input type="radio" name="cr_timetable" id="cr_timetable" value="03"><label for="15_18">15:00 - 18:00</label> 
+	        <input type="radio" name="cr_timetable" id="cr_timetable" value="04" class="validate-one-required"><label for="18_21">18:00 - 21:00</label>
+	    </div>
+    </div>
+    <?php endif; ?>
+
+    <?php if ($this->showAduanaMsg()): ?>
+    <div class="additional_msg_correos" style="margin: 8px 0 8px 15px; clear: both; "><p><?php echo addslashes(Mage::helper('correos')->getCarrierConfig('aduanamsj', $_metodo)); ?></p></div>
+    <?php endif; ?>
+    
+</div>

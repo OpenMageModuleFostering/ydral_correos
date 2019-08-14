@@ -1,0 +1,51 @@
+<?php
+$_helper = Mage::helper('correos');
+$_quote = Mage::getSingleton('checkout/session')->getQuote()->getShippingAddress();
+$_method = $this->getData('metodo');
+$_codpostal = $this->getData('codpostal');
+$_oficinas = $this->getHtmlOficinas($_codpostal);
+$partsMethod = explode('_', $this->getData('metodo')); 
+$_metodo = $partsMethod[0];
+?>
+<div id="content_puntos_correos" style="margin-left: 15px; clear: both; ">
+    <div class="correos_contact_info">
+        <b><?php echo $this->__('Introduce el Código Postal para buscar la oficina:') ?></b>
+        <input type="text" name="cp_oficina_correos" id="cp_oficina_correos" value="" />
+        <?php if ($_helper->validarMovil($_quote->getTelephone())): ?>
+            <input type="hidden" name="phone_correos" value="<?php echo $_quote->getTelephone() ?>" id="phone_correos" />
+        <?php endif; ?>
+        <input type="hidden" name="cp_search" value="<?php echo $this->getData('codpostal') ?>" id="cp_search" />
+        <input type="button" value="Buscar" onClick="PuntosCorreos.getPuntosCorreos('<?php echo $this->getData('metodo') ?>'); return false; " class="button" />
+    </div>
+    <div id="oficinas_correos_content">
+        <select id="oficinas_correos_content_select" name="oficinas_correos_content_select" onchange="PuntosCorreos.correosInfo();">
+            <?php foreach($_oficinas as $_oficina): ?>
+            <option value="<?php echo $_oficina['unidad']; ?>"><?php echo $_oficina['direccion'].' - '.$_oficina['cp'].' - '.$_oficina['localidad'] ?></option>
+            <?php endforeach; ?>
+        </select>
+    </div>
+    <div id="correos_info_time" style="display: none; "></div>
+    <?php if (Mage::helper('correos')->getValueConfig('showmap', 'opciones', Mage::app()->getStore()->getStoreId())): ?><div id="correos_info_map" style="display: none; "></div><?php endif; ?>
+    <br style="clear: both; "/><br />
+    <strong><?php echo $this->__('Confirma tus datos de contacto para informarte de tu envío:') ?></strong>
+
+    <br />
+    <div class="correos_contact_info">
+        <label for="correos_email"><?php echo $this->__('E-mail:') ?></label>
+        <input type="text" name="correos_email" value="<?php echo $_quote->getEmail() ?>" id="correos_email" class="required-correos input-text validate-email" />
+        <label for="phone_correos"><?php echo $this->__('Teléfono m&oacute;vil:') ?></label>
+        <input type="text" name="phone_correos" value="<?php if (!$_helper->validarMovil($_quote->getTelephone())) { echo ''; } else { echo $_quote->getTelephone(); }; ?>" id="phone_correos" class="required-correos input-text" />
+        <label for="correos_mobile_lang"><?php echo $this->__('Idioma SMS') ?></label>
+        <select style="width:95px" name="correos_mobile_lang" id="correos_mobile_lang">
+            <option value="1"><?php echo $this->__('Castellano') ?></option>
+            <option value="2"><?php echo $this->__('Catalá') ?></option>
+            <option value="3"><?php echo $this->__('Euskera') ?></option>
+            <option value="4"><?php echo $this->__('Gallego') ?></option>
+        </select>
+    </div>
+
+    <?php if ($this->showAduanaMsg()): ?>
+    <div class="additional_msg_correos" style="margin: 8px 0 8px 15px; clear: both; "><p><?php echo addslashes(Mage::helper('correos')->getCarrierConfig('aduanamsj', $_metodo)); ?></p></div>
+    <?php endif; ?>
+    
+</div>

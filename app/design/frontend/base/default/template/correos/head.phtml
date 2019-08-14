@@ -1,0 +1,17 @@
+<?php
+if (Mage::app()->getStore()->isCurrentlySecure()){
+	$url = 'https://maps-api-ssl.google.com/maps/api/js?sensor=false';
+} else {
+	$url = 'http://maps.google.com/maps/api/js?sensor=false';
+}
+$googleKey = Mage::helper('correos')->getValueConfig('mapgooglekey', 'opciones', Mage::app()->getStore()->getStoreId());
+if (!empty($googleKey)) $url .= '&key=your_api_key_here';
+echo '<script type="text/javascript" src="' . $url . '"></script>';
+?>
+<script type="text/javascript">
+    var BASE_URL_CORREOS = '<?php echo Mage::getUrl('', array('_secure'=>true)); ?>';
+    var SKIN_URL_CORREOS = '<?php echo $this->getSkinUrl(); ?>';
+    <?php if (Mage::helper('correos')->getCarrierConfig('aduana', 'correosinter')): ?>
+    var ADDITIONAL_MSG_CORREOS_INTERNACIONAL = '<?php echo addslashes(Mage::helper('correos')->getCarrierConfig('aduanamsj', 'correosinter')); ?>';
+    <?php endif; ?>
+</script>

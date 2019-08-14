@@ -1,0 +1,1433 @@
+<?xml version="1.0"?>
+<config>
+	<sections>
+		<correos translate="label" module="correos">
+            <label><![CDATA[Correos Configuraci&oacute;n]]></label>
+            <tab>sales</tab>
+            <sort_order>330</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <class>correos-section</class>
+            <groups>
+                
+                
+                <general translate="label">
+                    <label>General</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+
+        				<about>
+                            <frontend_model>correos/system_config_about</frontend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>0</sort_order>
+                        </about>
+
+                        <active translate="label">
+                            <label>Activado</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>10</sort_order>
+                        </active>
+
+                        <heading_configuration translate="label">
+                            <label><![CDATA[Configuraci&oacute;n del modulo de Correos. Los datos le ser&aacute;n enviados por Correos.]]></label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>20</sort_order>
+                        </heading_configuration>
+
+                        <etiquetador translate="label comment">
+                            <label><![CDATA[C&oacute;digo de etiquetador]]></label>
+                            <comment><![CDATA[Dato Obligatorio]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>30</sort_order>
+                        </etiquetador>
+                        <contrato translate="label comment">
+                            <label><![CDATA[N&uacute;mero de contrato]]></label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>40</sort_order>
+                            <comment><![CDATA[
+                                Dato Obligatorio
+                                <script type="text/javascript">
+                                function checkEtiquetador() {
+                                    if ( ($('correos_general_etiquetador') && $('correos_general_etiquetador').value != '') ||
+                                         ($('correos_general_contrato') && $('correos_general_contrato').value != '' && $('correos_general_numcliente') && $('correos_general_numcliente').value != '' )
+                                       )
+                                    { 
+                                       $('correos_general_etiquetador').removeClassName('required-entry'); 
+                                       $('correos_general_contrato').removeClassName('required-entry'); 
+                                       $('correos_general_numcliente').removeClassName('required-entry'); 
+                                    }
+                                    else
+                                    {
+                                       $('correos_general_etiquetador').addClassName('required-entry'); 
+                                       $('correos_general_contrato').addClassName('required-entry'); 
+                                       $('correos_general_numcliente').addClassName('required-entry'); 
+                                    }
+                                }
+                                Event.observe(window, 'load', function() {
+                                    checkEtiquetador();
+                                    Event.observe('correos_general_etiquetador', 'change', checkEtiquetador);
+                                    Event.observe('correos_general_contrato', 'change', checkEtiquetador);
+                                    Event.observe('correos_general_numcliente', 'change', checkEtiquetador);
+                                });
+                                </script>
+                            ]]></comment>
+                        </contrato>
+                        <numcliente translate="label comment">
+                            <label><![CDATA[N&uacute;mero de cliente]]></label>
+                            <comment><![CDATA[Dato Obligatorio]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>50</sort_order>
+                        </numcliente>
+                        
+                        <usercorreos translate="label comment">
+                            <label><![CDATA[Usuario de Correos]]></label>
+                            <comment><![CDATA[Usuario para la pasarela otorgado por Correos. Obligatorio.]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>60</sort_order>
+                        </usercorreos>
+                        <pwdcorreos translate="label comment">
+                            <label><![CDATA[Password de Correos]]></label>
+                            <frontend_type>text</frontend_type>
+                            <comment><![CDATA[Password para la pasarela otorgado por Correos. Obligatorio.]]></comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>70</sort_order>
+                        </pwdcorreos>
+
+                        <heading_urls translate="label">
+                            <label><![CDATA[Direcciones de correos.]]></label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>80</sort_order>
+                        </heading_urls>
+
+                        <gateway_preregistro translate="label">
+                            <label>URL datos</label>
+                            <default></default>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Solo modificar si Correos lo indica]]></comment>
+                            <sort_order>90</sort_order>
+                        </gateway_preregistro>
+                        <gateway_localizacion translate="label">
+                            <label><![CDATA[URL localizaci&oacute;n]]></label>
+                            <default></default>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Solo modificar si Correos lo indica]]></comment>
+                            <sort_order>100</sort_order>
+                        </gateway_localizacion>
+                        
+                    </fields>
+                </general>
+                
+                
+                <remitente translate="label">
+                    <label>Datos del remitente</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+
+        				<info_import_sender>
+                            <frontend_model>correos/system_config_infosender</frontend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>10</sort_order>
+                        </info_import_sender>
+
+						<multisender translate="label" module="payment">
+							<label><![CDATA[Utilizar Multiremitente]]></label>
+							<comment><![CDATA[Permite seleccionar entre diferentes direcciones el remitente del env&iacute;o.]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>1</show_in_store>
+							<sort_order>20</sort_order>
+						</multisender>
+
+                        <importsender translate="label">
+                            <label>Importar</label>
+                            <frontend_type>import</frontend_type>
+                            <backend_model>correos/system_config_backend_shipping_multiremitente</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>100</sort_order>
+                            <depends><multisender>1</multisender></depends>
+                        </importsender>
+
+
+                        <nombre translate="label">
+                            <label>Nombre del remitente</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>200</sort_order>
+                            <depends><multisender>0</multisender></depends>
+                            <!-- <validate>required-entry</validate> -->
+                            <comment><![CDATA[
+                                Obligatorio si no se cumplimenta Empresa + Persona de contacto
+                                <script type="text/javascript">
+                                function checkRemitente() {
+                                    if ( ($('correos_remitente_nombre') && $('correos_remitente_nombre').value != '' && $('correos_remitente_apellidos') && $('correos_remitente_apellidos').value != '' ) ||
+                                         ($('correos_remitente_empresa') && $('correos_remitente_empresa').value != '' && $('correos_remitente_personacontacto') && $('correos_remitente_personacontacto').value != '' )
+                                       )
+                                    { 
+                                       $('correos_remitente_nombre').removeClassName('required-entry'); 
+                                       $('correos_remitente_apellidos').removeClassName('required-entry'); 
+                                       $('correos_remitente_empresa').removeClassName('required-entry'); 
+                                       $('correos_remitente_personacontacto').removeClassName('required-entry'); 
+                                    }
+                                    else if ( (($('correos_remitente_nombre') && $('correos_remitente_nombre').value == '') || ($('correos_remitente_apellidos') && $('correos_remitente_apellidos').value == ''))
+                                               &&
+                                              (($('correos_remitente_empresa') && $('correos_remitente_empresa').value == '') || ($('correos_remitente_personacontacto') && $('correos_remitente_personacontacto').value == ''))
+                                             )
+                                    {
+                                       $('correos_remitente_nombre').addClassName('required-entry'); 
+                                       $('correos_remitente_apellidos').addClassName('required-entry'); 
+                                       $('correos_remitente_empresa').addClassName('required-entry'); 
+                                       $('correos_remitente_personacontacto').addClassName('required-entry'); 
+                                    }
+                                }
+                                Event.observe(window, 'load', function() {
+                                    checkRemitente();
+                                    Event.observe('correos_remitente_nombre', 'change', checkRemitente);
+                                    Event.observe('correos_remitente_apellidos', 'change', checkRemitente);
+                                    Event.observe('correos_remitente_empresa', 'change', checkRemitente);
+                                    Event.observe('correos_remitente_personacontacto', 'change', checkRemitente);
+                                });
+                                </script>
+                            ]]></comment>
+                        </nombre>
+                        <apellidos translate="label">
+                            <label>Apellidos del remitente</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>210</sort_order>
+                            <depends><multisender>0</multisender></depends>
+                            <comment><![CDATA[Obligatorio si no se cumplimenta Empresa + Persona de contacto]]></comment>
+                        </apellidos>
+                        <nif translate="label">
+                            <label>DNI/NIF</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>220</sort_order>
+                            <depends><multisender>0</multisender></depends>
+                        </nif>
+                        <empresa translate="label">
+                            <label>Empresa</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>230</sort_order>
+                            <depends><multisender>0</multisender></depends>
+                            <comment><![CDATA[Obligatorio si no se cumplimenta Nombre del remitente + Apellidos del remitente]]></comment>
+                        </empresa>
+                        <personacontacto translate="label">
+                            <label>Persona de contacto</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>240</sort_order>
+                            <depends><multisender>0</multisender></depends>
+                            <comment><![CDATA[Obligatorio si no se cumplimenta Nombre del remitente + Apellidos del remitente]]></comment>
+                        </personacontacto>
+                        <country_id translate="label">
+                            <label><![CDATA[Pa&iacute;s]]></label>
+                            <frontend_type>select</frontend_type>
+                            <frontend_class>countries</frontend_class>
+                            <source_model>adminhtml/system_config_source_country</source_model>
+                            <sort_order>250</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends><multisender>0</multisender></depends>
+                        </country_id>
+                        <region_id translate="label">
+                            <label>Provincia</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>260</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends><multisender>0</multisender></depends>
+                        </region_id>
+                        <codpostal translate="label">
+                            <label><![CDATA[C&oacute;digo Postal]]></label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>270</sort_order>
+                            <depends><multisender>0</multisender></depends>
+                            <validate>required-entry</validate>
+                        </codpostal>
+                        <localidad translate="label">
+                            <label>Localidad</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>280</sort_order>
+                            <depends><multisender>0</multisender></depends>
+                            <validate>required-entry</validate>
+                        </localidad>
+                        <direccion translate="label">
+                            <label><![CDATA[Direcci&oacute;n]]></label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>290</sort_order>
+                            <depends><multisender>0</multisender></depends>
+                            <validate>required-entry</validate>
+                        </direccion>
+                        <telefono translate="label">
+                            <label><![CDATA[Tel&eacute;fono]]></label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>300</sort_order>
+                            <depends><multisender>0</multisender></depends>
+                        </telefono>
+                        <email translate="label">
+                            <label>E-mail</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>310</sort_order>
+                            <depends><multisender>0</multisender></depends>
+                        </email>
+                        <telefonosms translate="label">
+                            <label><![CDATA[Tel&eacute;fono env&iacute;o de SMS]]></label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>320</sort_order>
+                            <depends><multisender>0</multisender></depends>
+                        </telefonosms>
+
+                    </fields>
+                </remitente>
+                
+                
+                <entregahoraria translate="label">
+                    <label><![CDATA[C&oacute;digos Postales para entrega horaria]]></label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>30</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <importcps translate="label">
+                            <label><![CDATA[Importar C&oacute;digos Postales]]></label>
+                            <frontend_type>import</frontend_type>
+                            <backend_model>correos/system_config_backend_shipping_entregahoraria</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>10</sort_order>
+                        </importcps>
+				    </fields>
+				</entregahoraria>
+				
+				
+				<dua>
+                    <label><![CDATA[Provincias para Documentaci&oacute;n Aduanera]]></label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>40</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <provincias translate="label">
+                            <label><![CDATA[Provincias para Documentaci&oacute;n Aduanera]]></label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>correos/system_config_source_provincias</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>10</sort_order>
+                        </provincias>
+				    </fields>
+				</dua>
+				
+				
+                <paquete translate="label">
+                    <label><![CDATA[Configuraci&oacute;n del paquete]]></label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>50</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <seguro translate="label">
+                            <label>Seguro de los paquetes</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>10</sort_order>
+                        </seguro>
+                        <importeseguro translate="label">
+                            <label><![CDATA[Valor asegurado (hasta)]]></label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>20</sort_order>
+                            <depends><seguro>1</seguro></depends>
+                        </importeseguro>
+                        <entregaexclusiva translate="label">
+                            <label><![CDATA[Entregar exclusivamente al destinatario]]></label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>30</sort_order>
+                        </entregaexclusiva>
+                        <cuentareembolso>
+                            <label><![CDATA[IBAN para ingresar reembolso]]></label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>40</sort_order>
+                        </cuentareembolso>
+                        <paquetefactura translate="label">
+                            <label><![CDATA[El paquete adjunta factura]]></label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>50</sort_order>
+                        </paquetefactura>
+                        <paquetelicencia translate="label">
+                            <label><![CDATA[El paquete adjunta licencia]]></label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>60</sort_order>
+                        </paquetelicencia>
+                        <paquetecertificado translate="label">
+                            <label><![CDATA[El paquete adjunta certificado]]></label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>70</sort_order>
+                        </paquetecertificado>
+                        <peso translate="label">
+                            <label><![CDATA[Configuraci&oacute;n del peso en el cat&aacute;logo]]></label>
+                            <comment><![CDATA[Indicar la unidad en la que se han a&ntilde;adido el peso en los productos del cat&aacute;logo]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>correos/system_config_source_pesos</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>80</sort_order>
+                        </peso>
+                    </fields>
+                </paquete>
+                
+                
+                <opciones>
+                    <label><![CDATA[Configuraciones adicionales]]></label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>60</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <savelog translate="label">
+                            <label>Activar log de Correos</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>10</sort_order>
+                        </savelog>
+                        <showjquery translate="label">
+                            <label>Cargar jQuery</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>20</sort_order>
+                        </showjquery>
+                        <showjqueryadmin translate="label">
+                            <label>Cargar jQuery en Admin</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>30</sort_order>
+                        </showjqueryadmin>
+                        <showmap translate="label">
+                            <label>Mostrar mapa de oficinas</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>50</sort_order>
+                        </showmap>
+                        <mapgooglekey>
+                            <label>Google Key para los mapas</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>51</sort_order>
+                        </mapgooglekey>
+                        <savepdf translate="label">
+                            <label>Guardar etiqueta PDF</label>
+                            <comment><![CDATA[Guarda la etiqueta en una carpeta local o es descargada desde el servidor de Correos en cada petici&oacute;n.]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>60</sort_order>
+                        </savepdf>
+                        <email_incidencia>
+                            <label><![CDATA[Email aviso por incidencias de webservice]]></label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>70</sort_order>
+                        </email_incidencia>
+                    </fields>
+                </opciones>
+            </groups>
+        </correos>
+
+
+
+
+
+        <carriers>
+            <groups>
+
+
+                <envio48 translate="label" module="shipping">
+                    <label><![CDATA[Correos - Paq 48 Domicilio]]></label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1150</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Activado</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>10</sort_order>
+                        </active>
+                        <title translate="label">
+                            <label><![CDATA[T&iacute;tulo]]></label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>20</sort_order>
+                        </title>
+                        <condition_name translate="label">
+                            <label><![CDATA[Tipo de condici&oacute;n]]></label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_shipping_tablerate</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>30</sort_order>
+                        </condition_name>
+                        <include_virtual_price  translate="label">
+                            <label>Include Virtual Products in Price Calculation</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>35</sort_order>
+                        </include_virtual_price>
+                        <export translate="label">
+                            <label>Exportar CSV</label>
+                            <frontend_type>button</frontend_type>
+                            <frontend_model>correos/system_export_envio48</frontend_model>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>40</sort_order>
+                        </export>
+                        <import translate="label">
+                            <label>Importar</label>
+                            <frontend_type>import</frontend_type>
+                            <backend_model>correos/system_config_backend_shipping_correos48</backend_model>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>50</sort_order>
+                        </import>
+                        <shippingfree translate="label">
+                            <label><![CDATA[Env&iacute;o gratuito desde]]></label>
+                            <comment><![CDATA[La cantidad ser&aacute; siempre para una cantidad de euros independientemente del tipo de env&iacute;o.]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>55</sort_order>
+                        </shippingfree>
+                        <max_weight translate="label">
+                            <label><![CDATA[Peso m&aacute;ximo carrito]]></label>
+                            <comment><![CDATA[El transportista no aparecer&aacute; disponible cuando el peso del carrito supere estos kilos. M&aacute;ximo 30 kilos.]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <backend_model>correos/system_config_backend_shipping_maxweight</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>58</sort_order>
+                        </max_weight>
+                        <cost translate="label">
+                            <label><![CDATA[Costo del env&iacute;o]]></label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>60</sort_order>
+                        </cost>
+                        <sallowspecific translate="label">
+                            <label><![CDATA[Env&iacute;o a pa&iacute;ses]]></label>
+                            <frontend_type>select</frontend_type>
+                            <frontend_class>shipping-applicable-country</frontend_class>
+                            <source_model>adminhtml/system_config_source_shipping_allspecificcountries</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>70</sort_order>
+                        </sallowspecific>
+                        <specificcountry translate="label">
+                            <label><![CDATA[Pa&iacute;ses de env&iacute;o]]></label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>adminhtml/system_config_source_country</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <can_be_empty>1</can_be_empty>
+                            <sort_order>80</sort_order>
+                        </specificcountry>
+                        <aduanamsj translate="label">
+                            <label>Mensaje Aduana</label>
+                            <frontend_type>textarea</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>90</sort_order>
+                        </aduanamsj>
+                        <horario translate="label">
+                            <label><![CDATA[Habilitar selecci&oacute;n de horario de entrega]]></label>
+                            <comment><![CDATA[Servicio disponible solo para Paq48 Expr&eacute;s entrega en domicilio. Correos le facturar&aacute; este servicio adem&aacute;s del precio del transporte. T&eacute;ngalo en cuenta a la hora de establecer los gastos de env&iacute;o.]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>100</sort_order>
+                        </horario>
+                        <sort_order translate="label">
+                            <label>Orden</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>200</sort_order>
+                        </sort_order>
+                    </fields>
+                </envio48>
+                <envio72 translate="label" module="shipping">
+                    <label><![CDATA[Correos - Paq 72 Domicilio]]></label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1160</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Activado</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>10</sort_order>
+                        </active>
+                        <title translate="label">
+                            <label><![CDATA[T&iacute;tulo]]></label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>20</sort_order>
+                        </title>
+                        <condition_name translate="label">
+                            <label><![CDATA[Tipo de condici&oacute;n]]></label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_shipping_tablerate</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>30</sort_order>
+                        </condition_name>
+                        <include_virtual_price  translate="label">
+                            <label>Include Virtual Products in Price Calculation</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>35</sort_order>
+                        </include_virtual_price>
+                        <export translate="label">
+                            <label>Exportar CSV</label>
+                            <frontend_type>button</frontend_type>
+                            <frontend_model>correos/system_export_envio72</frontend_model>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>40</sort_order>
+                        </export>
+                        <import translate="label">
+                            <label>Importar</label>
+                            <frontend_type>import</frontend_type>
+                            <backend_model>correos/system_config_backend_shipping_correos72</backend_model>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>50</sort_order>
+                        </import>
+                        <shippingfree translate="label">
+                            <label><![CDATA[Env&iacute;o gratuito desde]]></label>
+                            <comment><![CDATA[La cantidad ser&aacute; siempre para una cantidad de euros independientemente del tipo de env&iacute;o.]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>55</sort_order>
+                        </shippingfree>
+                        <max_weight translate="label">
+                            <label><![CDATA[Peso m&aacute;ximo carrito]]></label>
+                            <comment><![CDATA[El transportista no aparecer&aacute; disponible cuando el peso del carrito supere estos kilos. M&aacute;ximo 30 kilos.]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <backend_model>correos/system_config_backend_shipping_maxweight</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>58</sort_order>
+                        </max_weight>
+                        <cost translate="label">
+                            <label><![CDATA[Costo del env&iacute;o]]></label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>60</sort_order>
+                        </cost>
+                        <sallowspecific translate="label">
+                            <label><![CDATA[Env&iacute;o a pa&iacute;ses]]></label>
+                            <frontend_type>select</frontend_type>
+                            <frontend_class>shipping-applicable-country</frontend_class>
+                            <source_model>adminhtml/system_config_source_shipping_allspecificcountries</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>70</sort_order>
+                        </sallowspecific>
+                        <specificcountry translate="label">
+                            <label><![CDATA[Pa&iacute;ses de env&iacute;o]]></label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>adminhtml/system_config_source_country</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <can_be_empty>1</can_be_empty>
+                            <sort_order>80</sort_order>
+                        </specificcountry>
+                        <aduanamsj translate="label">
+                            <label>Mensaje Aduana</label>
+                            <frontend_type>textarea</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>95</sort_order>
+                        </aduanamsj>
+                        <sort_order translate="label">
+                            <label>Orden</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>100</sort_order>
+                        </sort_order>
+                    </fields>
+                </envio72>
+
+
+                <recogeroficina48 translate="label" module="shipping">
+                    <label><![CDATA[Correos - Recoger en oficina m&aacute;s cercana 48]]></label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1130</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Activar</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>10</sort_order>
+                        </active>
+                        <title translate="label">
+                            <label><![CDATA[T&iacute;tulo]]></label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>20</sort_order>
+                        </title>
+                        <condition_name translate="label">
+                            <label><![CDATA[Tipo de condici&oacute;n]]></label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_shipping_tablerate</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>30</sort_order>
+                        </condition_name>
+                        <include_virtual_price  translate="label">
+                            <label>Include Virtual Products in Price Calculation</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>35</sort_order>
+                        </include_virtual_price>
+                        <export translate="label">
+                            <label>Exportar CSV</label>
+                            <frontend_type>button</frontend_type>
+                            <frontend_model>correos/system_export_recoger48</frontend_model>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>40</sort_order>
+                        </export>
+                        <import translate="label">
+                            <label>Importar</label>
+                            <frontend_type>import</frontend_type>
+                            <backend_model>correos/system_config_backend_shipping_recoger48</backend_model>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>50</sort_order>
+                        </import>
+                        <shippingfree translate="label">
+                            <label><![CDATA[Env&iacute;o gratuito desde]]></label>
+                            <comment><![CDATA[La cantidad ser&aacute; siempre para una cantidad de euros independientemente del tipo de env&iacute;o.]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>55</sort_order>
+                        </shippingfree>
+                        <max_weight translate="label">
+                            <label><![CDATA[Peso m&aacute;ximo carrito]]></label>
+                            <comment><![CDATA[El transportista no aparecer&aacute; disponible cuando el peso del carrito supere estos kilos. M&aacute;ximo 30 kilos.]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <backend_model>correos/system_config_backend_shipping_maxweight</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>58</sort_order>
+                        </max_weight>
+                        <cost translate="label">
+                            <label><![CDATA[Costo del env&iacute;o]]></label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>60</sort_order>
+                        </cost>
+                        <sallowspecific translate="label">
+                            <label><![CDATA[Env&iacute;o a pa&iacute;ses]]></label>
+                            <frontend_type>select</frontend_type>
+                            <frontend_class>shipping-applicable-country</frontend_class>
+                            <source_model>adminhtml/system_config_source_shipping_allspecificcountries</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>70</sort_order>
+                        </sallowspecific>
+                        <specificcountry translate="label">
+                            <label><![CDATA[Pa&iacute;ses de env&iacute;o]]></label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>adminhtml/system_config_source_country</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <can_be_empty>1</can_be_empty>
+                            <sort_order>80</sort_order>
+                        </specificcountry>
+                        <aduanamsj translate="label">
+                            <label>Mensaje Aduana</label>
+                            <frontend_type>textarea</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>95</sort_order>
+                        </aduanamsj>
+                        <sort_order translate="label">
+                            <label>Orden</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>100</sort_order>
+                        </sort_order>
+                    </fields>
+                </recogeroficina48>
+
+                <recogeroficina72 translate="label" module="shipping">
+                    <label><![CDATA[Correos - Recoger en oficina m&aacute;s cercana 72]]></label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1140</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Activar</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>10</sort_order>
+                        </active>
+                        <title translate="label">
+                            <label><![CDATA[T&iacute;tulo]]></label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>20</sort_order>
+                        </title>
+                        <condition_name translate="label">
+                            <label><![CDATA[Tipo de condici&oacute;n]]></label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_shipping_tablerate</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>30</sort_order>
+                        </condition_name>
+                        <include_virtual_price  translate="label">
+                            <label>Include Virtual Products in Price Calculation</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>35</sort_order>
+                        </include_virtual_price>
+                        <export translate="label">
+                            <label>Exportar CSV</label>
+                            <frontend_type>button</frontend_type>
+                            <frontend_model>correos/system_export_recoger72</frontend_model>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>40</sort_order>
+                        </export>
+                        <import translate="label">
+                            <label>Importar</label>
+                            <frontend_type>import</frontend_type>
+                            <backend_model>correos/system_config_backend_shipping_recoger72</backend_model>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>50</sort_order>
+                        </import>
+                        <shippingfree translate="label">
+                            <label><![CDATA[Env&iacute;o gratuito desde]]></label>
+                            <comment><![CDATA[La cantidad ser&aacute; siempre para una cantidad de euros independientemente del tipo de env&iacute;o.]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>55</sort_order>
+                        </shippingfree>
+                        <max_weight translate="label">
+                            <label><![CDATA[Peso m&aacute;ximo carrito]]></label>
+                            <comment><![CDATA[El transportista no aparecer&aacute; disponible cuando el peso del carrito supere estos kilos. M&aacute;ximo 30 kilos.]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <backend_model>correos/system_config_backend_shipping_maxweight</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>58</sort_order>
+                        </max_weight>
+                        <cost translate="label">
+                            <label><![CDATA[Costo del env&iacute;o]]></label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>60</sort_order>
+                        </cost>
+                        <sallowspecific translate="label">
+                            <label><![CDATA[Env&iacute;o a pa&iacute;ses]]></label>
+                            <frontend_type>select</frontend_type>
+                            <frontend_class>shipping-applicable-country</frontend_class>
+                            <source_model>adminhtml/system_config_source_shipping_allspecificcountries</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>70</sort_order>
+                        </sallowspecific>
+                        <specificcountry translate="label">
+                            <label><![CDATA[Pa&iacute;ses de env&iacute;o]]></label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>adminhtml/system_config_source_country</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <can_be_empty>1</can_be_empty>
+                            <sort_order>80</sort_order>
+                        </specificcountry>
+                        <aduanamsj translate="label">
+                            <label>Mensaje Aduana</label>
+                            <frontend_type>textarea</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>95</sort_order>
+                        </aduanamsj>
+                        <sort_order translate="label">
+                            <label>Orden</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>100</sort_order>
+                        </sort_order>
+                    </fields>
+                </recogeroficina72>
+                
+                <correosinter translate="label" module="shipping">
+                    <label><![CDATA[Correos - Paquete Postal Internacional Prioritario]]></label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1170</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Activado</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>10</sort_order>
+                        </active>
+                        <title translate="label">
+                            <label><![CDATA[T&iacute;tulo]]></label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>20</sort_order>
+                        </title>
+                        <condition_name translate="label">
+                            <label><![CDATA[Tipo de condici&oacute;n]]></label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_shipping_tablerate</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>30</sort_order>
+                        </condition_name>
+                        <include_virtual_price  translate="label">
+                            <label>Include Virtual Products in Price Calculation</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>35</sort_order>
+                        </include_virtual_price>
+                        <export translate="label">
+                            <label>Exportar CSV</label>
+                            <frontend_type>button</frontend_type>
+                            <frontend_model>correos/system_export_internacional</frontend_model>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>40</sort_order>
+                        </export>
+                        <import translate="label">
+                            <label>Importar</label>
+                            <frontend_type>import</frontend_type>
+                            <backend_model>correos/system_config_backend_shipping_internacional</backend_model>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>50</sort_order>
+                        </import>
+                        <shippingfree translate="label">
+                            <label><![CDATA[Env&iacute;o gratuito desde]]></label>
+                            <comment><![CDATA[La cantidad ser&aacute; siempre para una cantidad de euros independientemente del tipo de env&iacute;o.]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>55</sort_order>
+                        </shippingfree>
+                        <max_weight translate="label">
+                            <label><![CDATA[Peso m&aacute;ximo carrito]]></label>
+                            <comment><![CDATA[El transportista no aparecer&aacute; disponible cuando el peso del carrito supere estos kilos. M&aacute;ximo 30 kilos.]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <backend_model>correos/system_config_backend_shipping_maxweight</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>58</sort_order>
+                        </max_weight>
+                        <cost translate="label">
+                            <label><![CDATA[Costo del env&iacute;o]]></label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>60</sort_order>
+                        </cost>
+                        <sallowspecific translate="label">
+                            <label><![CDATA[Env&iacute;o a pa&iacute;ses]]></label>
+                            <frontend_type>select</frontend_type>
+                            <frontend_class>shipping-applicable-country</frontend_class>
+                            <source_model>adminhtml/system_config_source_shipping_allspecificcountries</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>70</sort_order>
+                        </sallowspecific>
+                        <specificcountry translate="label">
+                            <label><![CDATA[Pa&iacute;ses de env&iacute;o]]></label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>adminhtml/system_config_source_country</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <can_be_empty>1</can_be_empty>
+                            <sort_order>80</sort_order>
+                        </specificcountry>
+                        <aduanamsj translate="label">
+                            <label>Mensaje Aduana</label>
+                            <frontend_type>textarea</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>95</sort_order>
+                        </aduanamsj>
+                        <sort_order translate="label">
+                            <label>Orden</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>100</sort_order>
+                        </sort_order>
+                    </fields>
+                </correosinter>
+
+                <homepaq48>
+                    <label><![CDATA[Correos - CorreosPaq 48]]></label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1110</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Activado</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>10</sort_order>
+                        </active>
+                        <title translate="label">
+                            <label><![CDATA[T&iacute;tulo]]></label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>20</sort_order>
+                        </title>
+                        <condition_name translate="label">
+                            <label><![CDATA[Tipo de condici&oacute;n]]></label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_shipping_tablerate</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>30</sort_order>
+                        </condition_name>
+                        <include_virtual_price  translate="label">
+                            <label>Include Virtual Products in Price Calculation</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>35</sort_order>
+                        </include_virtual_price>
+                        <export translate="label">
+                            <label>Exportar CSV</label>
+                            <frontend_type>button</frontend_type>
+                            <frontend_model>correos/system_export_homepaq48</frontend_model>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>40</sort_order>
+                        </export>
+                        <import translate="label">
+                            <label>Importar</label>
+                            <frontend_type>import</frontend_type>
+                            <backend_model>correos/system_config_backend_shipping_homepaq48</backend_model>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>50</sort_order>
+                        </import>
+                        <shippingfree translate="label">
+                            <label><![CDATA[Env&iacute;o gratuito desde]]></label>
+                            <comment><![CDATA[La cantidad ser&aacute; siempre para una cantidad de euros independientemente del tipo de env&iacute;o.]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>55</sort_order>
+                        </shippingfree>
+                        <max_weight translate="label">
+                            <label><![CDATA[Peso m&aacute;ximo carrito]]></label>
+                            <comment><![CDATA[El transportista no aparecer&aacute; disponible cuando el peso del carrito supere estos kilos. M&aacute;ximo 30 kilos.]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <backend_model>correos/system_config_backend_shipping_maxweight</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>58</sort_order>
+                        </max_weight>
+                        <cost translate="label">
+                            <label><![CDATA[Costo del env&iacute;o]]></label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>60</sort_order>
+                        </cost>
+                        <aduanamsj translate="label">
+                            <label>Mensaje Aduana</label>
+                            <frontend_type>textarea</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>95</sort_order>
+                        </aduanamsj>
+                        <sort_order translate="label">
+                            <label>Orden</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>100</sort_order>
+                        </sort_order>
+                    </fields>
+                </homepaq48>
+
+                <homepaq72>
+                    <label><![CDATA[Correos - CorreosPaq 72]]></label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1120</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Activado</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>10</sort_order>
+                        </active>
+                        <title translate="label">
+                            <label><![CDATA[T&iacute;tulo]]></label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>20</sort_order>
+                        </title>
+                        <condition_name translate="label">
+                            <label><![CDATA[Tipo de condici&oacute;n]]></label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_shipping_tablerate</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>30</sort_order>
+                        </condition_name>
+                        <include_virtual_price  translate="label">
+                            <label>Include Virtual Products in Price Calculation</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>35</sort_order>
+                        </include_virtual_price>
+                        <export translate="label">
+                            <label>Exportar CSV</label>
+                            <frontend_type>button</frontend_type>
+                            <frontend_model>correos/system_export_homepaq72</frontend_model>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>40</sort_order>
+                        </export>
+                        <import translate="label">
+                            <label>Importar</label>
+                            <frontend_type>import</frontend_type>
+                            <backend_model>correos/system_config_backend_shipping_homepaq72</backend_model>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>50</sort_order>
+                        </import>
+                        <shippingfree translate="label">
+                            <label><![CDATA[Env&iacute;o gratuito desde]]></label>
+                            <comment><![CDATA[La cantidad ser&aacute; siempre para una cantidad de euros independientemente del tipo de env&iacute;o.]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>55</sort_order>
+                        </shippingfree>
+                        <max_weight translate="label">
+                            <label><![CDATA[Peso m&aacute;ximo carrito]]></label>
+                            <comment><![CDATA[El transportista no aparecer&aacute; disponible cuando el peso del carrito supere estos kilos. M&aacute;ximo 30 kilos.]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <backend_model>correos/system_config_backend_shipping_maxweight</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>58</sort_order>
+                        </max_weight>
+                        <cost translate="label">
+                            <label><![CDATA[Costo del env&iacute;o]]></label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>60</sort_order>
+                        </cost>
+                        <aduanamsj translate="label">
+                            <label>Mensaje Aduana</label>
+                            <frontend_type>textarea</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>95</sort_order>
+                        </aduanamsj>
+                        <sort_order translate="label">
+                            <label>Orden</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>100</sort_order>
+                        </sort_order>
+                    </fields>
+                </homepaq72>
+
+            </groups>
+        </carriers>
+    </sections>
+</config>

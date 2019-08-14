@@ -1,0 +1,170 @@
+<?php
+$_helper = Mage::helper('correos');
+$_quote = Mage::getSingleton('checkout/session')->getQuote()->getShippingAddress();
+
+$_method = $this->getData('metodo');
+$_puntos = $this->getData('puntos');
+$_token  = $this->getData('token');
+$selected_paqs = $selectedpaq_data = $selectedpaq_code = '';
+$partsMethod = explode('_', $this->getData('metodo')); 
+$_metodo = $partsMethod[0];
+
+if (isset($_puntos['errorCode']) && ($_puntos['errorCode'] == '-1')):
+?>
+
+<div id="content_homepaq_correos">
+    
+    <p id="correospaq_alert_cod" class="correospaq_alert_cod"><?php echo $this->__('¡No compatible con Reembolso!') ?></p>
+
+    <div id="homepaq_result">
+        <a href="#" onclick="PuntosCorreos.getPuntosHomepaq('<?php echo $_method ?>');return false;" id="homepaqback"><?php echo $this->__('Volver a introducir Usuario') ?></a>
+        <div id="homepaq_result_fail" class="homepaq_register_link" style="">
+            <span><?php echo $this->__('Usuario no válido') ?></span>
+            <span class="homepaq_register_link"><a href="https://online.correospaq.es/pages/registro.xhtml" id="homepaqurl" target="_blank"><strong><?php echo $this->__('¡Regístrate Gratis!') ?></strong></a></span>
+        </div>
+    </div>
+    
+    <div style="clear: both; "></div>
+    
+</div>
+
+<?php elseif (!isset($_puntos['errorCode'])): ?>
+
+<div id="content_homepaq_correos">
+    
+    <p id="correospaq_alert_cod" class="correospaq_alert_cod"><?php echo $this->__('¡No compatible con Reembolso!') ?></p>
+     
+    <div id="homepaq_result">
+        <a href="#" onclick="PuntosCorreos.getPuntosHomepaq('<?php echo $_method ?>');return false;" id="homepaqback"><?php echo $this->__('Volver a introducir Usuario') ?></a>
+        <span id="homepaq_result_ok" class="homepaq_result_ok">
+            <?php echo $this->__('Selecciona tu terminal:') ?>
+            <select id="homepaqs" name="homepaqs" onchange="PuntosCorreos.update_homepaq()" style="width:160px">
+                <?php foreach($_puntos as $_puntoHomePaq): ?>
+                    <?php 
+                    if(isset($_puntoHomePaq['defaultHomepaq']) && $_puntoHomePaq['defaultHomepaq'] == 'true')
+                    {
+                        $optionSelected     = true;
+                        $selectedpaq_data   = addslashes($_puntoHomePaq['streetType']." ".$_puntoHomePaq['address']." ".$_puntoHomePaq['number']."|".$_puntoHomePaq['postalCode']."|".$_puntoHomePaq['city']."|".$_puntoHomePaq['state']."|".$_puntoHomePaq['alias']);
+                        $selectedpaq_code   = $_puntoHomePaq['code'];
+                        $selected_paqs      = str_replace('undefined', '', $_puntoHomePaq['streetType']." ".$_puntoHomePaq['address']." ".$_puntoHomePaq['number'].", ".$_puntoHomePaq['postalCode']." ".$_puntoHomePaq['city'].(($_puntoHomePaq['city']==$_puntoHomePaq['state'])?"":", ".$_puntoHomePaq['state']));
+                    } else {
+                        $optionSelected = false;
+                    }
+                    ?>
+                    <option value="<?php echo $_puntoHomePaq['code'] ?>"<?php echo ($optionSelected)?" selected":""; ?>><?php echo $_puntoHomePaq['alias']; ?></option>
+                <?php endforeach; ?>
+            </select>
+            
+        </span>
+        <span class="homepaq_result_ok" style="">
+            <br style="clear: both; "/><br />
+            <strong><?php echo $this->__('Confirma tus datos de contacto para informarte de tu envío:') ?></strong>
+            <br />
+            <div class="correos_contact_info">
+                <label for="correos_email"><?php echo $this->__('E-mail:') ?></label>
+                <input type="text" name="correos_email" value="<?php echo $_quote->getEmail() ?>" id="correos_email" class="required-entry input-text required-entry" />
+                <label for="phone_correos"><?php echo $this->__('Teléfono móvil:') ?></label>
+                <input type="text" name="phone_correos" value="<?php if (!$_helper->validarMovil($_quote->getTelephone())) { echo ''; } else { echo $_quote->getTelephone(); }; ?>" id="phone_correos" style="width:100px; border: 1px solid #ffd300; padding:2px" class="required-entry input-text required-entry" />
+            </div>
+            <br />
+            
+            
+            
+            
+            <div id="correospaq_additional">
+                <a href="#" class="paqSearch" onclick="$('citypaqs_options').toggle();$(this).toggle();return false;"><?php echo $this->__('Buscar otro') ?></a>
+                
+                <div id="citypaqs_options" style="display:none">
+                    <div class="radio_citypaq_searchtype">
+                       <div class="radio_citypaq_searchtype_row">
+                          <a href="#" class="paqsearch" id="paqsearch_other" onclick="citypaqsearch();return false;" title="Buscar"><?php echo $this->__('Buscar') ?></a>
+                       </div>
+                       <div class="radio_citypaq_searchtype_row">
+                          <div id="citypaq_searchtype_state_container">
+                             <span id="citypaq_searchtype_state_loading" style="display:none"><img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" alt="" /><?php echo $this->__('Cargando...') ?></span>
+                             <select id="citypaq_state"></select>
+                             <input type="text" name="citypaq_cp" id="citypaq_cp" value="">
+                          </div>
+                       </div>
+                       <div class="radio_citypaq_searchtype_row">
+                          <label for="citypaq_searchtype_state" class="radio_citypaq_searchtype"><?php echo $this->__('Buscar por Provincia') ?></label>
+                          <label for="citypaq_searchtype_cp" class="radio_citypaq_searchtype"><?php echo $this->__('Buscar por Código Postal') ?></label>
+                       </div>
+                       <div class="radio_citypaq_searchtype_row">
+                          <input type="radio" name="radio_citypaq_searchtype" class="radio_citypaq_searchtype radio_citypaq" value="state" id="citypaq_searchtype_state" onchange="getStatesWithCitypaq()">
+                          <input type="radio" name="radio_citypaq_searchtype" class="radio_citypaq_searchtype radio_citypaq" value="cp" id="citypaq_searchtype_cp">
+                       </div>
+                    </div>
+                    
+                    
+                    <span id="citypaq_search_loading" style="display:none"> <img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" alt="" /><?php echo $this->__('Cargando...') ?></span>
+                    <span id="citypaq_search_fail" style="display:none"></span>
+                    
+                    
+                
+                    <div id="citypaqs_map_options" style="display:none">
+                        <div id="citypaqs_map_wrapper">
+                            <div id="citypaqs_map"></div>
+                        </div>
+                        <div id="citypaqs_info">
+                            <p><strong><?php echo $this->__('Terminal:') ?></strong></p>
+                            <select id="citypaqs" name="citypaqs" onchange="citypaq_infoGoogleMaps(); setselectedpaq('citypaqs'); update_paq()"></select>
+                            <br />
+                            <p><strong><?php echo $this->__('Dirección:') ?></strong></p>
+                            <p id="citypaqs_address"></p>
+                            <p><strong><?php echo $this->__('Horario:') ?></strong> <span id="citypaqs_schedule"></span></p>
+                        </div>
+                        <br class="clear_correos" />
+                        <p style="font-size:13px; margin-top:10px;"><strong><?php echo $this->__('Terminal seleccionado para la compra:') ?></strong> <span id="selected_paq"><?php echo $selected_paqs; ?></span></p>
+                        <span id="addtofavorites" style="display:none">
+                            <a href="#" onclick="addtofavorites();return false;" id="addtofavorites_btn">
+                                <span id="addtofavorites_txt"><?php echo $this->__('Agregar a Favoritos') ?></span><span class="arrow_rightafter"></span>
+                            </a>
+                            <span id="addtofavorites_loading" style="display:none"> <img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" alt="" /><?php echo $this->__('Cargando...') ?></span>
+          
+                            <a href="#" id="addtofavorites_url" onClick="window.open(this.href,'mywindow','width=500,height=500');return false" style="display:none">
+                                <span class="arrow_rightbefore"></span>
+                                <span id="addtofavorites_txtpopup"><?php echo $this->__('Continúa el proceso en la siguiente página') ?></span>
+                                <span class="arrow_rightafter"></span>
+                            </a>
+                        </span>
+                        <br /><br />
+                    </div>
+                </div>
+                
+            </div>
+        </span>
+        
+        <?php if ($this->showAduanaMsg()): ?>
+        <div class="additional_msg_correos" style="margin: 8px 0 8px 15px; clear: both; "><p><?php echo addslashes(Mage::helper('correos')->getCarrierConfig('aduanamsj', $_metodo)); ?></p></div>
+        <?php endif; ?>
+        
+    </div>
+    
+    <input type="hidden" id="homepaq_token" name="homepaq_token" value="<?php echo $_token ?>" />
+    <input type="hidden" id="selectedpaq_data" name="selectedpaq_data" value="<?php echo $selectedpaq_data ?>" />
+    <input type="hidden" id="selectedpaq_code" name="selectedpaq_code" value="<?php echo $selectedpaq_code ?>" />
+    
+    <div style="clear: both; "></div>
+    
+</div>
+
+<?php else: ?>
+
+<div id="content_homepaq_correos">
+    
+    <p id="correospaq_alert_cod" class="correospaq_alert_cod"><?php echo $this->__('¡No compatible con Reembolso!') ?></p>
+    
+    <div id="homepaq_result">
+        <a href="#" onclick="PuntosCorreos.getPuntosHomepaq('<?php echo $_metodo ?>');return false;" id="homepaqback"><?php echo $this->__('Buscar de nuevo') ?></a>
+        <div id="homepaq_result_fail" class="homepaq_register_link" style="">
+            <span><?php echo $this->__('Nombre de usuario inválido') ?></span>
+            <span class="homepaq_register_link"><a href="https://online.correospaq.es/pages/registro.xhtml" id="homepaqurl" target="_blank"><strong><?php echo $this->__('¡Regístrate Gratis!') ?></strong></a></span>
+        </div>
+    </div>
+    
+    <div style="clear: both; "></div>
+    
+</div>
+
+<?php endif; ?>

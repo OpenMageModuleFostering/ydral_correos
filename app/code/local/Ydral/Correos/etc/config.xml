@@ -1,0 +1,471 @@
+<?xml version="1.0"?>
+
+<config>
+    
+    
+	<modules>
+		<Ydral_Correos>
+			<version>4.0.0</version>
+		</Ydral_Correos>
+	</modules>
+	
+	
+	<global>
+	    
+		<blocks>
+			<correos>
+				<class>Ydral_Correos_Block</class>
+			</correos>
+			
+			
+			<!-- escapeHtml for Correos Logo -->
+            <checkout>
+                <rewrite>
+                    <onepage_shipping_method_available>Ydral_Correos_Block_Onepage_Shipping_Method_Available</onepage_shipping_method_available>
+                    <onepage_progress>Ydral_Correos_Block_Onepage_Progress</onepage_progress>
+                    <cart_shipping>Ydral_Correos_Block_Cart_Shipping</cart_shipping>
+                </rewrite>
+            </checkout>
+            <tax>
+                <rewrite>
+                    <checkout_shipping>Ydral_Correos_Block_Onepage_Tax</checkout_shipping>
+                </rewrite>
+            </tax>
+            <!-- end escapeHtml -->
+            
+            <adminhtml>
+                <rewrite>
+                    <sales_order_view_tab_info>Ydral_Correos_Block_Adminhtml_Sales_Order_View_Tab_Info</sales_order_view_tab_info><!-- box info shipping inside order info -->
+                    <sales_order_grid>Ydral_Correos_Block_Adminhtml_Sales_Order_Grid</sales_order_grid>
+                    <sales_order_create_shipping_method_form>Ydral_Correos_Block_Adminhtml_Sales_Order_Create_Shipping_Method_Form</sales_order_create_shipping_method_form>
+                    <sales_order_shipment_create_items>Ydral_Correos_Block_Adminhtml_Sales_Order_Shipment_Create_Items</sales_order_shipment_create_items>
+                </rewrite>
+            </adminhtml>
+			
+		</blocks>		
+		
+		<helpers>
+			<correos>
+				<class>Ydral_Correos_Helper</class>
+			</correos>
+		</helpers>
+		
+		<models>
+			<correos>
+				<class>Ydral_Correos_Model</class>
+				<resourceModel>correos_resource</resourceModel>
+			</correos>
+            <correos_resource>
+			    <class>Ydral_Correos_Model_Resource</class>
+			    
+			    <entities>
+                    <correos>
+                        <table>correos_shipping</table>
+                    </correos>
+		            <remitente>
+		           		<table>correos_remitente</table>
+		            </remitente>
+                    <recoger>
+                        <table>correos_recoger_oficina</table>
+                    </recoger>
+                    <homepaq>
+                        <table>correos_homepaq</table>
+                    </homepaq>
+                    <registro>
+                        <table>correos_registro</table>
+                    </registro>
+                    <entregahoraria>
+                        <table>correos_entrega_horaria</table>
+                    </entregahoraria>
+			    </entities>
+            </correos_resource>
+            
+            <sales>
+                <rewrite>
+                    <order_shipment>Ydral_Correos_Model_Shipment</order_shipment>
+                    <quote_address_total_shipping>Ydral_Correos_Model_Quote_Address_Total_Shipping</quote_address_total_shipping>
+                </rewrite>
+            </sales>
+            
+		</models>
+		
+		<resources>
+			<correos_setup>
+				<setup>
+				    <module>Ydral_Correos</module>
+				</setup>
+				<connection>
+					<use>core_setup</use>
+				</connection>
+			</correos_setup>
+			<correos_read>
+				<connection>
+					<use>core_read</use>
+				</connection>
+			</correos_read>
+			<correos_write>
+				<connection>
+					<use>core_write</use>
+				</connection>
+			</correos_write>
+		</resources>
+		
+        <sales>
+            <order>
+                <statuses>
+                    <authorized translate="label">
+                        <label>Authorized Payment</label>
+                    </authorized>
+                </statuses>
+                <states>
+                    <authorized translate="label">
+                        <label>Authorized Payment</label>
+                        <statuses>
+                            <authorized default="1"/>
+                        </statuses>
+                        <visible_on_front>1</visible_on_front>
+                    </authorized>
+                </states>
+            </order>
+        </sales>
+        
+        <template>
+            <email>
+                <correos_logistica_inversa module="correos">
+                    <label>Retorno Paquete</label>
+                    <file>correos/logistica_inversa.html</file>
+                    <type>html</type>
+                </correos_logistica_inversa>
+                <correos_carriers_status module="correos">
+                    <label>Shipping Method Status</label>
+                    <file>correos/status_method.html</file>
+                    <type>html</type>
+                </correos_carriers_status>
+                <correos_ws_status module="correos">
+                    <label>WS Correos Status</label>
+                    <file>correos/status_ws.html</file>
+                    <type>html</type>
+                </correos_ws_status>
+            </email>
+        </template>
+        
+        <events>
+            <sales_quote_save_before>
+                <observers>
+                    <correos_quote_save_before>
+                        <type>singleton</type>
+                        <class>Ydral_Correos_Model_Observer</class>
+                        <method>saveQuoteBefore</method>
+                    </correos_quote_save_before>
+                </observers>
+            </sales_quote_save_before>
+            <sales_quote_save_after>
+                 <observers>
+                    <correos_quote_save_after>
+                        <type>singleton</type>
+                        <class>Ydral_Correos_Model_Observer</class>
+                        <method>saveQuoteAfter</method>
+                    </correos_quote_save_after>
+                </observers>
+            </sales_quote_save_after>
+            <sales_quote_load_after>
+                <observers>
+                    <correos_quote_load_after>
+                        <type>singleton</type>
+                        <class>Ydral_Correos_Model_Observer</class>
+                        <method>loadQuoteAfter</method>
+                    </correos_quote_load_after>
+                </observers>
+            </sales_quote_load_after>
+            <sales_model_service_quote_submit_after>
+                <observers>
+                    <correos_order_quote_submit_after>
+                        <type>singleton</type>
+                        <class>Ydral_Correos_Model_Observer</class>
+                        <method>saveOrderAfter</method>
+                    </correos_order_quote_submit_after>
+                </observers>
+            </sales_model_service_quote_submit_after>
+            <sales_order_load_after>
+                <observers>
+                    <correos_order_load_after>
+                        <type>singleton</type>
+                        <class>Ydral_Correos_Model_Observer</class>
+                        <method>loadOrderAfter</method>
+                    </correos_order_load_after>
+                </observers>
+            </sales_order_load_after>
+            <sales_order_place_before>
+                <observers>
+                    <correos_order_save_before>
+                        <type>singleton</type>
+                        <class>Ydral_Correos_Model_Observer</class>
+                        <method>saveOrderBefore</method>
+                    </correos_order_save_before>
+                </observers>
+            </sales_order_place_before>
+            <payment_method_is_active>
+                <observers>
+                    <correos_payment_method_is_active>
+                        <type>singleton</type>
+                        <class>Ydral_Correos_Model_Observer</class>
+                        <method>paymentMethodIsActive</method>
+                    </correos_payment_method_is_active>
+                </observers>
+            </payment_method_is_active>
+        </events>
+        
+	</global>
+	
+	
+	<frontend>
+	    
+		<secure_url>
+			<correos>/correos</correos>
+		</secure_url>
+		
+		<routers>
+			<correos>
+				<use>standard</use>
+				<args>
+					<module>Ydral_Correos</module>
+					<frontName>correos</frontName>
+				</args>
+			</correos>            
+		</routers>
+		
+		<layout>
+		    <updates>
+		        <correos>
+		            <file>correos.xml</file>
+		        </correos>
+		    </updates>
+		</layout>
+		
+		<translate>
+			<modules>
+				<correos>
+					<files>
+						<default>Ydral_Correos.csv</default>
+					</files>
+				</correos>
+			</modules>
+		</translate>
+		
+		<!--
+        <events>
+            <checkout_controller_onepage_save_shipping_method>
+                <observers>
+                    <ydral_correos_shipping_observer>
+                        <type>model</type>
+                        <class>Ydral_Correos_Model_Observer</class>
+                        <method>setOficinaCorreosRecogida</method>
+                    </ydral_correos_shipping_observer>
+                </observers>
+            </checkout_controller_onepage_save_shipping_method>
+            <sales_order_place_after>
+                <observers>
+                    <ydral_correos_order_observer>
+                        <type>model</type>
+                        <class>Ydral_Correos_Model_Observer</class>
+                        <method>setOficinaCorreosRecogidaOrder</method>
+                    </ydral_correos_order_observer>
+                </observers>
+            </sales_order_place_after>
+        </events>
+        -->
+        
+
+        
+	</frontend>
+	
+
+	<adminhtml>
+	    
+   		<layout>
+            <updates>
+                <correos>
+                    <file>correos.xml</file>
+                </correos>
+            </updates>
+        </layout>
+        
+        <!--
+        <events>
+            <checkout_submit_all_after>
+                <observers>
+                    <ydral_correos_adminhtml_observer>
+                        <type>model</type>
+                        <class>Ydral_Correos_Model_Observer</class>
+                        <method>setOficinaCorreosRecogidaOrderAdminhtml</method>
+                    </ydral_correos_adminhtml_observer>
+                </observers>
+            </checkout_submit_all_after>
+        </events>
+        -->
+        
+        <events>
+            <!-- <admin_system_config_changed_section_carriers> -->
+            <model_config_data_save_before>
+                <observers>
+                    <ydral_correos_carriers_observer>
+                        <type>model</type>
+                        <class>Ydral_Correos_Model_Observer</class>
+                        <method>monitorCarriers</method>
+                    </ydral_correos_carriers_observer>
+                </observers>
+            </model_config_data_save_before>
+            <!-- </admin_system_config_changed_section_carriers> -->
+        </events>
+        
+        
+		<acl>
+		    <resources>
+		        <admin>
+			        <children>
+			            <system>
+			                <children>
+			                    <config>
+			                        <children>
+			                            <correos translate="title" module="correos">
+			                                <title><![CDATA[Correos Configuraci&oacute;n]]></title>
+			                            </correos>
+			                        </children>
+			                    </config>
+			                </children>
+			            </system>
+			        </children>
+			    </admin>
+		    </resources>
+		</acl>
+		
+		<translate>
+			<modules>
+				<correos>
+					<files>
+						<default>Ydral_Correos.csv</default>
+					</files>
+				</correos>
+			</modules>
+		</translate>
+    </adminhtml>
+
+
+	<admin>
+    	<routers>
+            <correos>
+                <use>correos</use>
+                <args>
+                    <module>Ydral_Correos</module>
+                    <frontName>correos</frontName>
+                </args>
+            </correos>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <ydral_correos before="Mage_Adminhtml">Ydral_Correos</ydral_correos>
+                    </modules>
+                </args> 
+            </adminhtml>
+        </routers>
+	</admin>
+	
+	
+	
+	
+	<default>
+		<correos>
+			<general>
+				<active>0</active>
+				<gateway_preregistro>https://preregistroenvios.correos.es/preregistroenvios</gateway_preregistro>
+				<gateway_localizacion>https://online.correos.es/servicioswebLocalizacionMI/localizacionMI.asmx</gateway_localizacion>
+				<!-- <gateway_homepaq>https://onlinepre.correospaq.es/correospaqws/CorreospaqService</gateway_homepaq> -->
+				<gateway_homepaq>https://online.correospaq.es/correospaqws/CorreospaqService</gateway_homepaq>
+				<gateway_recoger>http://localizadoroficinas.correos.es/localizadoroficinas</gateway_recoger>
+			</general>
+			<remitente>
+			    <multisender>0</multisender>
+			    <country_id>ES</country_id>
+			</remitente>
+			<paquete>
+			    <seguro>0</seguro>
+			    <entregaexclusiva>0</entregaexclusiva>
+			    <paquetefactura>0</paquetefactura>
+			    <paquetelicencia>0</paquetelicencia>
+			    <paquetecertificado>0</paquetecertificado>
+			    <peso>gramos</peso>
+			</paquete>
+			<opciones>
+			    <logger>0</logger>
+			    <showmap>1</showmap>
+			    <savepdf>0</savepdf>
+			    <const_peso_volumetrico>6.000</const_peso_volumetrico>
+			</opciones>
+			<dua>
+			    <provincias><![CDATA[Las Palmas,Santa Cruz de Tenerife,Ceuta,Melilla]]></provincias>
+			</dua>
+	    </correos>
+	    <carriers>            
+            <homepaq48>
+                <model>correos/correos_homepaq48</model>
+                <active>0</active>
+                <title><![CDATA[Entrega en HomePaq o CityPaq en 1-2 d&iacute;as]]></title>
+                <name>Paq 48 entrega en CorreosPaq</name>
+                <sort_order>10</sort_order>
+                <max_weight>30</max_weight>
+            </homepaq48>
+            <homepaq72>
+                <model>correos/correos_homepaq72</model>
+                <active>0</active>
+                <title><![CDATA[Entrega en HomePaq o CityPaq en 2-3 d&iacute;as]]></title>
+                <name>Paq 72 entrega en CorreosPaq</name>
+                <sort_order>20</sort_order>
+                <max_weight>30</max_weight>
+            </homepaq72>
+            
+            <recogeroficina48>
+                <model>correos/correos_recogeroficina48</model>
+                <active>0</active>
+                <title><![CDATA[Recogida en la Oficina que elijas en 1-2 d&iacute;as]]></title>
+                <name>Paq 48 Oficina</name>
+                <sort_order>30</sort_order>
+                <max_weight>30</max_weight>
+            </recogeroficina48>
+            <recogeroficina72>
+                <model>correos/correos_recogeroficina72</model>
+                <active>0</active>
+                <title><![CDATA[Recogida en la Oficina que elijas en 2-3 d&iacute;as]]></title>
+                <name>Paq 72 Oficina</name>
+                <sort_order>40</sort_order>
+                <max_weight>30</max_weight>
+            </recogeroficina72>
+            
+            <envio48>
+                <model>correos/correos_correos48</model>
+                <active>0</active>
+                <title><![CDATA[Entrega en su domicilio en 1-2 d&iacute;as]]></title>
+                <name>Paq 48 Domicilio</name>
+                <sort_order>50</sort_order>
+                <max_weight>30</max_weight>
+            </envio48>
+            <envio72>
+                <model>correos/correos_correos72</model>
+                <active>0</active>
+                <title><![CDATA[Entrega en su domicilio en 2-3 d&iacute;as]]></title>
+                <name>Paq 72 Domicilio</name>
+                <sort_order>60</sort_order>
+                <max_weight>30</max_weight>
+            </envio72>
+            
+            <correosinter>
+                <model>correos/correos_correosinter</model>
+                <active>0</active>
+                <title><![CDATA[Paquete Postal Internacional Prioritario]]></title>
+                <name>Correos Paquete Postal Internacional</name>
+                <sort_order>70</sort_order>
+                <max_weight>30</max_weight>
+            </correosinter>
+            
+		</carriers>
+	</default>
+</config>

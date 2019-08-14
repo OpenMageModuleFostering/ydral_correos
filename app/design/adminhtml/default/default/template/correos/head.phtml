@@ -1,0 +1,13 @@
+<?php
+if (Mage::app()->getStore()->isCurrentlySecure()){
+	$url = 'https://maps-api-ssl.google.com/maps/api/js?sensor=false';
+} else {
+	$url = 'http://maps.google.com/maps/api/js?sensor=false';
+}
+echo '<script type="text/javascript" src="' . $url . '"></script>';
+?>
+<script type="text/javascript">
+    var BASE_URL_CORREOS = '<?php echo Mage::getUrl('/',array('_secure'=>true)); ?>';
+    var SKIN_URL_CORREOS = '<?php echo $this->getSkinUrl(); ?>';
+    var CONST_PESO_VOLUMETRICO = '<?php echo Mage::helper('correos')->getValueConfig('const_peso_volumetrico', 'opciones', Mage::app()->getStore()->getStoreId()); ?>';
+</script>

@@ -1,0 +1,78 @@
+label[for=s_method_recogeroficina_recogeroficina] { line-height: 40px; }
+label[for=s_method_envio4872_envio4872] { line-height: 40px; }
+.title_correos_method { display: none; }
+#correos_info_map { float: left; border: 1px solid #ccc; width: 350px; height: 180px; margin-right: 10px; margin-top: 15px; }
+#correos_info_time  { float: left; width: 240px; height: 180px; margin-top: 15px; margin-right:15px;}
+#correos_info_time li { font-size: 12px; }
+#correos_info_time li strong { font-size: 13px; }
+.sp-methods dt { clear: both; font-weight: bold; margin: 13px 0 5px; }
+
+.correos_contact_info {margin:15px 0; }
+.correos_contact_info label { background: none !important; }
+
+#content_puntos_correos { margin-bottom: 12px; }
+#content_puntos_correos select,
+#content_puntos_correos input { height: 31px; }
+
+#content_homepaq_correos { text-align: right; padding: 8px; margin-left: 15px; clear: both; }
+#homepaq_search p,
+#homepaq_search strong,
+#content_homepaq_correos a { font: 12px/1.55 Arial, Helvetica, sans-serif; color: #2f2f2f; }
+#homepaq_search p { line-height: 30px; float: right; }
+#homepaq_search strong,
+#homepaq_search a {font-weight: 600; }
+#homepaquser { padding:3px 5px !important;  border:1px solid #FFD300; margin-bottom:0 !important; top:0px !important; height: 30px !important;}
+#homepaqsearch  {width:130px !important;padding:4px 0 4px 30px !important;text-decoration:none; text-align:center;background-color:#FFD300;font-weight:bold;display:inline-block;height:30px !important;}
+#homepaqsearch.homepaqsearch{background:#FFD300 url('images/homepaqsearch.gif') no-repeat 5px 3px !important; line-height: 25px; }
+#homepaqsearch.homepaqloading {background:#FFD300 url('images/ajax-loader.gif') no-repeat 9px center !important; padding:4px 15px 4px 15px !important;}
+.homepaq_register_link {height: 31px;line-height: 27px;display:inline-block;margin-top:0;font-weight:bold;clear: both;float:right;} 
+#homepaqurl{background:url('images/boton_arrow.gif') no-repeat  center !important; font-weight:bold;padding:5px 10px;display:inline-block;width:150px; text-align:center;}
+#homepaqback { text-decoration:none; border:1px solid #FFD300; background:url('images/arrow_left.gif') no-repeat 5px center !important; height: 31px !important;line-height: 31px !important;padding: 0 5px 0 42px !important;display:inline-block; !important; font-family: "Helvetica Neue", Verdana, Arial, sans-serif !important; font-size: 14px !important;}
+#homepaq_result_fail {padding:0px 0px 0px 35px !important; background:url('images/error.gif') no-repeat 5px center !important; border:1px solid #FFD300; margin-left:10px;  }
+#homepaq_result_empty {padding:0px 0px 0px 10px !important; border:1px solid #FFD300; margin-left:10px; white-space: nowrap; }
+#homepaq_result_ok {border:1px solid #FFD300;height: 31px !important;line-height: 31px;padding: 0 2px 0 7px !important;display: inline-block;}
+
+#paqsearch, .paqsearch  { padding:0px 8px 0px 8px !important; text-decoration:none;  text-align:center; background-color:#FFD300; font-weight:bold; display:inline-block; height:28px !important; line-height: 28px !important; color: #000000; } 
+#paqsearch {width:160px !important; }
+
+label.radio_citypaq_searchtype { width:150px !important;text-align:left;padding-left:8px;display: block !important; padding-bottom: 5px !important; padding-top: 5px !important; font-weight: normal;background:none !important;}
+#citypaq_searchtype_state_container {display:inline-block !important; width:103px; text-align:left; margin-left:15px;}
+#citypaq_cp, 
+#paq_mobile, 
+#citypaq_state, 
+#paq_email { border: 1px solid #ffd300; padding: 2px; width: 80px; margin: 2px 0; }
+#citypaq_state {width:87px; height:auto; line-height: auto; margin: 2px 0;}
+#paqsearch_other {margin:10px 0 0 0px; padding-left:15px}
+#paqsearch_other.paqsearch{background:#FFD300 url('images/homepaqsearch.gif') no-repeat 5px 3px !important; padding:0px 8px 0px 30px !important;}
+#correos_info_map, 
+#citypaqs_map_wrapper { border: 1px solid #CCCCCC; float: left; height: 220px; margin-right: 20px; width:360px; }
+#citypaqs_map_options {margin-top: 10px; text-align:left}
+#citypaqs_map_options p {padding:2px !important}
+#citypaqs_map { width: 100%; height: 100%; }
+#citypaqs { max-width: 200px; }
+.clear_correos {clear: both;}
+#addtofavorites a { text-decoration: none; }
+#addtofavorites_txt {background:#FFD302 url("images/favorite.gif") no-repeat scroll 5px center !important; padding:3px 7px 3px 35px; color: #333; }
+#addtofavorites_url {font-weight:bold; text-align:underline;width:500px;height: 500px;}
+.arrow_rightafter { background: url("images/boton_arrow.gif") no-repeat scroll right center rgba(0, 0, 0, 0) !important; padding: 3px 7px; }
+#citypaqs_info p { margin: 4px 0; }
+#citypaq_search_fail {color:red; font-weight:bold}
+.correospaq_alert_cod { font-size: 13px; font-weight: bold; color: red; margin: 8px 0 !important; padding: 0; text-align: left; }
+#content_homepaq_correos .validation-advice { background: none !important; }
+.arrow_rightbefore {background: url("images/boton_arrow.gif") no-repeat scroll left center rgba(0, 0, 0, 0) !important; padding: 3px 7px; }
+#addtofavorites_txtpopup {background: #FFD302 url("images/arrow_right.gif") no-repeat scroll left center !important; padding: 3px 7px 3px 25px; }
+.arrow_rightafter { background: url("images/boton_arrow.gif") no-repeat scroll right center rgba(0, 0, 0, 0) !important; padding: 3px 20px; margin-left: -5px; }
+
+#homepaqs {margin-left:10px; padding: 3px 8px !important; height:24px !important; line-height:24px !important; margin-top:0px; margin-bottom:0px !important;}
+#homepaq_result_empty #homepaqurl { background:url('images/boton_arrow_long.gif') no-repeat  center right !important; padding: 0; width: 180px; text-align: center; }
+.correos_timetable { margin: 10px 0; }
+.correos_timetable label { display: inline !important; padding: 6px 10px 6px 10px !important; background: none !important; }
+#correospaq_additional {}
+#correospaq_additional a.paqSearch { background-color:#FFD300; color: #333; padding: 0px 13px !important; text-align: center; font-weight: bold; height: 28px !important; display: inline-block; line-height: 28px !important; border: 0; text-decoration: none; }
+.radio_citypaq_searchtype {margin:0 !important; overflow: hidden;}
+div.radio_citypaq_searchtype .radio_citypaq_searchtype_row {float:right; }
+div.radio_citypaq_searchtype .radio_citypaq{ display: block; line-height: 28px; height: 28px; }
+
+/*PS 16*/
+div.radio_citypaq_searchtype .radio_citypaq_searchtype_row div.radio {display:block !important; margin: 6px 0 8px !important;}
+
