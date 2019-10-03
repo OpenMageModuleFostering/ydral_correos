@@ -1,16 +1,19 @@
 {
-    "name": "OpenMageModuleFostering/Ydral_Correos",
+    "name": "OpenMageModuleFostering\/Ydral_Correos",
     "type": "magento-module",
     "license": "OSL-3.0",
     "homepage": "",
     "description": "Modulo para Magento para integrar Correos.",
     "authors": [
-    {
-        "name": "Ydral",
-        "email": "webmaster@ydral.com"
-    }
-],
+        {
+            "name": "Ydral",
+            "email": "webmaster@ydral.com"
+        }
+    ],
     "suggest": {
-        "magento-hackathon/magento-composer-installer": "*"
-    }
+        "magento-hackathon\/magento-composer-installer": "*"
+    },
+    "keywords": [
+        "openmage-module"
+    ]
 }
